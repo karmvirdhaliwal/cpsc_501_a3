@@ -16,6 +16,8 @@ import java.lang.reflect.Array;
 
 
 public class Inspector {
+	
+	private static final int DEPTH_INCREASE = 1;
 
     public void inspect(Object obj, boolean recursive) {
         Class<?> c = obj.getClass();
@@ -55,7 +57,7 @@ public class Inspector {
         	//recursively inspecting superclasses 
         	while(immediateSuper != null) {
         		
-        		inspectClass(immediateSuper, obj, recursive, depth+1);
+        		inspectClass(immediateSuper, obj, recursive, depth+DEPTH_INCREASE);
         		break;
         	}
         	//finding and printing immediate interface
@@ -71,7 +73,7 @@ public class Inspector {
         			String tempName = interfaces[i].getName();
         			Class<?> tempClass = interfaces[i];
         			System.out.println(indent + "Interface: " + tempName);
-        			inspectClass(tempClass, obj, recursive, depth+1);
+        			inspectClass(tempClass, obj, recursive, depth+DEPTH_INCREASE);
         		}
         	}
         	//getting constructors
@@ -210,7 +212,7 @@ public class Inspector {
             					Class<?> cl = fieldVal.getClass();
                 				System.out.println(indent + "Value: " + fieldVal + System.identityHashCode(fieldVal));
                 				System.out.println(indent+ "Recursively inspect: ");
-                				inspectClass(cl,fieldVal,recursive,depth+1);
+                				inspectClass(cl,fieldVal,recursive,depth+DEPTH_INCREASE);
             				}
             				else{
             					System.out.println(indent + "Value: " + fieldVal);
