@@ -23,14 +23,20 @@ public class Inspector {
         Class<?> c = obj.getClass();
         inspectClass(c, obj, recursive, 0);
     }
+    
+    public String getTabbing(int depth) {
+    	//for indentation
+		String tab = "	";
+    	String indent = tab.repeat(depth);
+    	return indent;
+    }
 
     private void inspectClass(Class<?> c, Object obj, boolean recursive, int depth) {
 		// note: depth will be needed to capture the output indentation level
     	try {
     		
-    		//for indentation
-    		String tab = "	";
-        	String indent = tab.repeat(depth);
+    		
+        	String indent = getTabbing(depth);
         	
         	System.out.println(indent + "CLASS");
         	
